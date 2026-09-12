@@ -1,0 +1,94 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Earth Through Time</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#020711;color:#eef7ff;font:14px system-ui,sans-serif;overflow:hidden}
+#app{height:100vh;display:grid;grid-template-columns:290px 1fr;grid-template-rows:1fr 150px}
+aside{grid-row:1/3;padding:18px;background:#071321;border-right:1px solid #23405a;overflow:auto}
+h1{font-size:19px;margin:0}h1 span{color:#5edcff}.sub{color:#91a9bd;font-size:11px;line-height:1.45;margin:5px 0 18px}
+h2{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#718ba0;margin:18px 0 8px}
+button{font:inherit}.period{display:block;width:100%;text-align:left;background:#0b1c2d;color:#cad9e5;border:1px solid #1c354b;border-radius:8px;padding:8px;margin:5px 0;cursor:pointer}.period.active{background:#12364d;border-color:#5edcff;color:#fff}.period b{display:block;font-size:12px}.period small{color:#7892a8;font-size:10px}
+.info{background:#0b1c2d;border:1px solid #1c354b;border-radius:9px;padding:10px;font-size:11px;line-height:1.5;color:#b9cad8}.tags{display:flex;gap:5px;flex-wrap:wrap}.tag{font-size:10px;padding:4px 7px;border:1px solid #294960;border-radius:20px;color:#a7d0df}
+#world{position:relative;background:radial-gradient(circle,#0b2940,#020711 67%)}canvas{width:100%;height:100%;display:block;touch-action:none;cursor:grab;-webkit-user-select:none;user-select:none}canvas.drag{cursor:grabbing}
+.read{position:absolute;right:18px;top:18px;text-align:right;background:#030b14cc;border:1px solid #28445a;border-radius:10px;padding:9px 12px}.read i{font-size:9px;color:#5edcff;letter-spacing:1px;font-style:normal}.read b{display:block;font-size:18px}.read span{font-size:10px;color:#91a9bd}
+.hint{position:absolute;bottom:16px;left:50%;transform:translateX(-50%);background:#030b14cc;border:1px solid #28445a;border-radius:20px;padding:7px 11px;color:#8fa7ba;font-size:10px;pointer-events:none}
+#timeline{grid-column:2;background:#050e18;border-top:1px solid #20394e;padding:12px 22px}.head{display:flex;justify-content:space-between;font-size:11px}.head span{color:#5edcff}input{width:100%;accent-color:#5edcff;margin:14px 0 6px}.ticks{display:flex;justify-content:space-between;color:#668095;font-size:9px}.btn{margin-top:8px;background:#0b1c2d;border:1px solid #29465d;color:#dce8f1;border-radius:7px;padding:6px 10px;cursor:pointer}
+@media(max-width:700px){#app{grid-template-columns:210px 1fr}.read{display:none}}
+</style>
+</head>
+<body>
+<div id="app">
+<aside>
+<h1>EARTH <span>THROUGH TIME</span></h1>
+<div class="sub">Explore 4.54 billion years of Earth history.</div>
+<h2>Major chapters</h2><div id="periods"></div>
+<h2>About this time</h2><div class="info" id="info"></div>
+<h2>Life</h2><div class="tags" id="tags"></div>
+</aside>
+<main id="world">
+<canvas id="globe"></canvas>
+<div class="read"><i id="era"></i><b id="title"></b><span id="age"></span></div>
+<div class="hint">Drag to rotate · wheel to zoom · drag the timeline to travel through time</div>
+</main>
+<section id="timeline"><div class="head"><b>TIME TRAVEL</b><span id="age2"></span></div><input id="slider" type="range" min="0" max="1000" value="0"><div class="ticks"><span>Earth</span><span>First life</span><span>Cambrian</span><span>Pangaea</span><span>Dinosaurs</span><span>Mammals</span><span>Now</span></div><button class="btn" id="play">▶ Play</button><button class="btn" id="reset">↺ Reset</button></section>
+</div>
+<script>
+"use strict";
+const D=[
+[0,"Earth forms","4.54 billion years ago","Hadean","Earth forms from the young Solar System. Its surface is intensely hot and volcanic.",["🌋 Volcanoes","☄️ Meteorites","🌊 Early water"]],
+[120,"First life","~3.5 billion years ago","Archean","Ancient oceans contain microbial ecosystems. Stromatolites preserve evidence of early life.",["🦠 Microbes","🧫 Stromatolites","🌊 Oceans"]],
+[260,"Oxygen rises","~2.4 billion years ago","Proterozoic","Photosynthetic microbes contribute to the Great Oxidation Event and transform Earth's atmosphere.",["🦠 Cyanobacteria","🌬️ Oxygen","🧬 Complex cells"]],
+[500,"Cambrian","~540 million years ago","Paleozoic","Animal diversity expands dramatically in the fossil record.",["🦐 Trilobites","🪱 Worms","🐚 Arthropods"]],
+[650,"Pangaea","~300 million years ago","Late Paleozoic","Most major continental blocks assemble into the supercontinent Pangaea.",["🦎 Reptiles","🌲 Conifers","🦂 Arthropods"]],
+[750,"Jurassic","~170 million years ago","Mesozoic","Dinosaurs are widespread while Pangaea continues breaking apart.",["🦖 Dinosaurs","🦕 Sauropods","🌲 Conifers"]],
+[835,"Asteroid impact","66 million years ago","Mesozoic → Cenozoic","The end-Cretaceous extinction eliminates non-avian dinosaurs and reshapes ecosystems.",["☄️ Impact","🦖 Dinosaurs","🐀 Mammals"]],
+[930,"Ice ages","~2.6 million years ago","Quaternary","Repeated glacial cycles reshape landscapes as human ancestors spread.",["🧊 Glaciers","🦣 Mammoths","🧑 Humans"]],
+[1000,"Present day","Today","Holocene","Modern continents occupy their present broad positions.",["🧑 Humans","🐋 Whales","🌳 Forests"]]
+];
+const cv=document.getElementById("globe"),ctx=cv.getContext("2d");
+const periods=document.getElementById("periods");
+const info=document.getElementById("info");
+const tags=document.getElementById("tags");
+const era=document.getElementById("era");
+const title=document.getElementById("title");
+const age=document.getElementById("age");
+const age2=document.getElementById("age2");
+const slider=document.getElementById("slider");
+const play=document.getElementById("play");
+const reset=document.getElementById("reset");
+let W=0,H=0,dpr=1,rx=.12,ry=-.5,z=1,drag=false,lx=0,ly=0,t=0,playing=false;
+function resize(){dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);draw()}
+window.addEventListener("resize",resize);
+function proj(lat,lon,r,cx,cy){let a=(lon+ry*57)*Math.PI/180,b=(lat+rx*57)*Math.PI/180;return{x:cx+r*Math.cos(b)*Math.sin(a),y:cy-r*Math.sin(b),z:Math.cos(b)*Math.cos(a)}}
+function poly(P,r,cx,cy){ctx.beginPath();P.forEach((v,i)=>{let q=proj(v[0],v[1],r,cx,cy);i?ctx.lineTo(q.x,q.y):ctx.moveTo(q.x,q.y)});ctx.closePath();ctx.fill();ctx.stroke()}
+function draw(){
+ ctx.clearRect(0,0,W,H);let cx=W*.53,cy=H*.5,r=Math.min(W,H)*.34*z;
+ for(let i=0;i<180;i++){let x=(i*83)%W,y=(i*47)%H;if((x-cx)**2+(y-cy)**2>r*r*1.35){ctx.fillStyle="rgba(255,255,255,.55)";ctx.fillRect(x,y,1,1)}}
+ let g=ctx.createRadialGradient(cx-r*.3,cy-r*.3,0,cx,cy,r*1.1);g.addColorStop(0,"#1a5d7c");g.addColorStop(.58,"#0b3550");g.addColorStop(1,"#06131f");ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,r,0,7);ctx.fill();
+ ctx.strokeStyle="rgba(120,215,240,.13)";ctx.lineWidth=1;
+ for(let lat=-60;lat<=60;lat+=30){ctx.beginPath();for(let lon=-90;lon<=90;lon+=4){let q=proj(lat,lon,r,cx,cy);lon===-90?ctx.moveTo(q.x,q.y):ctx.lineTo(q.x,q.y)}ctx.stroke()}
+ let P;
+ if(t<180)P=[[[ -25,-100],[5,-75],[35,-35],[25,5],[-10,20],[-35,-20]],[[20,70],[45,100],[25,145],[-5,125],[-15,90]]];
+ else if(t>585&&t<715)P=[[[ -50,-150],[-25,-125],[5,-110],[30,-80],[45,-35],[35,5],[20,45],[-5,70],[-30,45],[-50,0],[-55,-70]]];
+ else P=[[[ -55,-150],[-35,-125],[-5,-110],[25,-95],[45,-70],[25,-45],[-5,-55],[-30,-80]],[[55,5],[60,35],[40,60],[20,55],[5,25],[20,5]],[[15,95],[30,120],[55,145],[45,165],[15,150],[-5,125],[-20,105],[-10,85]],[[-15,-20],[-5,15],[-20,35],[-45,25],[-50,-5],[-35,-25]]];
+ ctx.fillStyle="#7daa70";ctx.strokeStyle="#c6df98";ctx.lineWidth=1.5;P.forEach(p=>poly(p,r,cx,cy));
+ ctx.strokeStyle="rgba(95,220,255,.42)";ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,r,0,7);ctx.stroke();
+}
+function setTime(v){t=v;let p=D.reduce((a,b)=>Math.abs(b[0]-v)<Math.abs(a[0]-v)?b:a);era.textContent=p[3];title.textContent=p[1];age.textContent=p[2];age2.textContent=p[2];info.innerHTML="<b>"+p[1]+"</b><br>"+p[4];tags.innerHTML=p[5].map(x=>"<span class=tag>"+x+"</span>").join("");document.querySelectorAll(".period").forEach((e,i)=>e.classList.toggle("active",Math.abs(D[i][0]-v)<35));draw()}
+D.forEach(p=>{let b=document.createElement("button");b.className="period";b.innerHTML="<b>"+p[1]+"</b><small>"+p[2]+"</small>";b.onclick=()=>{slider.value=p[0];setTime(p[0])};periods.appendChild(b)});
+slider.oninput=()=>setTime(Number(slider.value));
+cv.onpointerdown=e=>{drag=true;lx=e.clientX;ly=e.clientY;cv.classList.add("drag");cv.setPointerCapture(e.pointerId)};
+cv.onpointermove=e=>{if(!drag)return;ry+=(e.clientX-lx)*.009;rx+=(e.clientY-ly)*.009;rx=Math.max(-1.2,Math.min(1.2,rx));lx=e.clientX;ly=e.clientY;draw()};
+cv.onpointerup=()=>{drag=false;cv.classList.remove("drag")};
+cv.onpointercancel=()=>{drag=false;cv.classList.remove("drag")};
+cv.onwheel=e=>{e.preventDefault();z=Math.max(.7,Math.min(1.45,z-e.deltaY*.0007));draw()};
+play.onclick=()=>{playing=!playing;play.textContent=playing?"❚❚ Pause":"▶ Play";if(playing)tick()};
+function tick(){if(!playing)return;slider.value=(+slider.value+2)%1001;setTime(+slider.value);setTimeout(tick,40)}
+reset.onclick=()=>{rx=.12;ry=-.5;z=1;slider.value=0;setTime(0)};
+resize();setTime(0);
+</script>
+</body>
+</html>
