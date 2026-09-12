@@ -3,152 +3,137 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
-<title>Earth Through Time — Interactive Explorer</title>
+<title>Earth Through Time</title>
 <style>
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#020713;color:#eef8ff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button{font:inherit;color:inherit}#app{height:100%;display:grid;grid-template-columns:300px 1fr;grid-template-rows:1fr 112px;background:radial-gradient(circle at 60% 45%,#082f4c 0,#031323 38%,#020713 72%)}
-#side{grid-row:1/2;background:rgba(3,14,27,.95);border-right:1px solid #17415d;padding:18px 14px;overflow:auto;z-index:4}
-.brand{font-size:22px;font-weight:900;letter-spacing:.3px}.brand b{color:#2ed7ff}.sub{color:#8da8bc;font-size:13px;margin:4px 0 20px}
-h3{font-size:11px;letter-spacing:2px;color:#7ea3b9;margin:18px 4px 8px}
-.chapter{width:100%;text-align:left;border:1px solid #21445c;background:#0a1b2b;border-radius:12px;padding:10px;margin:5px 0;cursor:pointer}
-.chapter.active{border-color:#31d7ff;box-shadow:0 0 16px #1bbde633;background:#10324a}.chapter strong{display:block}.chapter small{color:#87a2b6}
-#main{position:relative;overflow:hidden}.stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(#78dfff 1px,transparent 1px);background-size:83px 83px,137px 137px;background-position:10px 15px,40px 80px;opacity:.38}
-#topbar{position:absolute;top:12px;left:18px;right:18px;z-index:3;display:flex;gap:7px;align-items:center;overflow:auto;padding-bottom:4px}
-.nav{white-space:nowrap;border:1px solid #24506a;background:#071a2b;border-radius:10px;padding:9px 12px;font-size:12px}.nav.active{border-color:#2bd9ff;color:#bff5ff;box-shadow:0 0 14px #20cfff33}
-#globe{position:absolute;inset:0;width:100%;height:100%;touch-action:none;display:block}
-#periodCard{position:absolute;left:20px;top:72px;z-index:2;background:#061523dd;border:1px solid #287092;border-radius:14px;padding:11px 15px;backdrop-filter:blur(8px)}
-#periodCard b{display:block;font-size:18px}.cyan{color:#35dcff}.muted{color:#8ba4b7;font-size:12px}
-#hint{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:#061a2add;border:1px solid #2a5d78;border-radius:20px;padding:9px 14px;font-size:12px;color:#a9c3d2;z-index:2;white-space:nowrap}
-#panel{position:absolute;right:18px;top:72px;width:min(330px,calc(100% - 36px));max-height:calc(100% - 105px);overflow:auto;background:rgba(4,17,29,.96);border:1px solid #28647f;border-radius:18px;padding:14px;z-index:5;display:none;box-shadow:0 18px 50px #0009}
-#panel.show{display:block}.close{float:right;border:0;background:#102b3d;border-radius:50%;width:32px;height:32px;cursor:pointer}.panelTitle{font-size:21px;font-weight:800;margin:5px 40px 2px 0}.panelAge{color:#32d9ff;font-size:12px}.panelBody{line-height:1.5;color:#c7d8e2;font-size:13px}.fact{padding:9px 0;border-top:1px solid #173a4d}.fact b{color:#fff}.tag{display:inline-block;padding:4px 7px;border-radius:10px;background:#0b3042;border:1px solid #1c5b73;margin:2px;font-size:11px}
-.listen{width:100%;margin-top:10px;border:1px solid #1fe1a8;background:#063a36;border-radius:12px;padding:11px;cursor:pointer}.listen.playing{background:#075e50}
-#bottom{grid-column:1/3;background:#031321ee;border-top:1px solid #1a465d;padding:10px 20px;z-index:8}
-.timelineTop{display:flex;justify-content:space-between;font-size:13px}.timelineTop b{color:#42dcff}
-#slider{width:100%;accent-color:#36d8ff;margin:8px 0 3px}.labels{display:flex;justify-content:space-between;color:#6f92a5;font-size:10px}
-.controls{display:flex;gap:7px;align-items:center}.ctl{border:1px solid #28546b;background:#081e30;border-radius:10px;padding:7px 10px;font-size:11px}.ctl.on{border-color:#34d9ff;color:#bff7ff}
-@media(max-width:760px){#app{grid-template-columns:1fr;grid-template-rows:1fr 116px}#side{position:absolute;left:0;top:0;bottom:116px;width:min(300px,88%);transform:translateX(-102%);transition:.25s;box-shadow:20px 0 40px #0008}#side.open{transform:none}#menu{display:block!important}#panel{top:62px;max-height:calc(100% - 125px)}#periodCard{left:10px;top:58px}.nav{padding:8px 10px}#hint{bottom:10px;font-size:10px}}
-#menu{display:none;border:1px solid #28627d;background:#071b2b;border-radius:9px;padding:8px 10px}
+*{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden;background:#020914;color:#eefaff;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit;color:inherit}#app{height:100%;display:grid;grid-template-columns:285px 1fr;grid-template-rows:1fr 118px;background:radial-gradient(circle at 58% 45%,#073b59,#031323 42%,#020914 78%)}
+#side{background:#041321f5;border-right:1px solid #1d4e68;padding:16px 13px;overflow:auto;z-index:10}.logo{font-size:20px;font-weight:900}.logo span{color:#39dcff}.sub{font-size:12px;color:#91aabc;margin:4px 0 18px;line-height:1.4}
+h3{font-size:10px;letter-spacing:2px;color:#7fa4b8;margin:16px 4px 7px}.era{display:block;width:100%;text-align:left;background:#092033;border:1px solid #20485e;border-radius:11px;padding:9px;margin:5px 0;cursor:pointer}.era.active{border-color:#37dcff;box-shadow:0 0 15px #28cfff33}.era strong{display:block;font-size:13px}.era small{color:#86a0b2}.tools{display:grid;grid-template-columns:1fr 1fr;gap:6px}.btn{background:#082035;border:1px solid #28566e;border-radius:10px;padding:8px;font-size:11px;cursor:pointer}.btn:hover{border-color:#43ddff}
+#main{position:relative;overflow:hidden}.stars{position:absolute;inset:0;background-image:radial-gradient(#fff 1px,transparent 1px),radial-gradient(#68dcff 1px,transparent 1px);background-size:91px 91px,147px 147px;opacity:.35}#top{position:absolute;z-index:4;left:15px;right:15px;top:10px;display:flex;gap:6px;overflow:auto}.topbtn{white-space:nowrap;background:#061a2aee;border:1px solid #27536b;border-radius:10px;padding:8px 10px;font-size:11px}.topbtn.active{border-color:#3ddfff}
+#menu{display:none}.card{position:absolute;z-index:3;left:18px;top:62px;background:#061827e8;border:1px solid #28637d;border-radius:14px;padding:10px 14px;backdrop-filter:blur(8px)}.card .eraName{color:#3edcff;font-size:11px}.card b{display:block;font-size:18px}.card small{color:#8ba5b7}
+#globe{position:absolute;inset:0;width:100%;height:100%;touch-action:none}.hint{position:absolute;z-index:3;bottom:17px;left:50%;transform:translateX(-50%);background:#061a2be8;border:1px solid #28586f;border-radius:20px;padding:8px 13px;font-size:11px;color:#a9c3d1;white-space:nowrap}.badge{position:absolute;z-index:3;bottom:62px;left:18px;background:#061b2de8;border:1px solid #2b6a84;border-radius:12px;padding:7px 10px;font-size:11px}
+#panel{display:none;position:absolute;z-index:12;right:16px;top:60px;width:min(340px,calc(100% - 32px));max-height:calc(100% - 100px);overflow:auto;background:#041421f7;border:1px solid #2a6b87;border-radius:18px;padding:14px;box-shadow:0 20px 55px #000b}.close{float:right;border:0;background:#123047;border-radius:50%;width:31px;height:31px}.icon{font-size:34px}.ptitle{font-size:20px;font-weight:800}.page{font-size:11px;color:#37dcff;margin:2px 0 9px}.body{font-size:13px;color:#c9d9e3;line-height:1.5}.fact{border-top:1px solid #173a4d;padding:9px 0}.tag{display:inline-block;border:1px solid #1c5b73;background:#0a3042;border-radius:9px;padding:3px 6px;font-size:10px;margin:2px}.speak{width:100%;margin-top:9px;border-radius:11px;padding:10px;cursor:pointer;background:#073d39;border:1px solid #25dfb0}.guide{background:#06344b;border-color:#45ceff}
+#bottom{grid-column:1/3;background:#031321f2;border-top:1px solid #1c4a61;padding:8px 18px;z-index:9}.line{display:flex;justify-content:space-between;font-size:12px}.line b{color:#42ddff}.range{width:100%;accent-color:#39d9ff}.labels{display:flex;justify-content:space-between;color:#6f92a5;font-size:9px}.bottomBtns{display:flex;gap:6px;margin-top:5px}.bottomBtns .btn{padding:6px 9px}
+@media(max-width:760px){#app{grid-template-columns:1fr;grid-template-rows:1fr 118px}#side{position:absolute;top:0;bottom:118px;width:min(290px,88%);transform:translateX(-105%);transition:.25s;box-shadow:20px 0 45px #0009}#side.open{transform:none}#menu{display:block}.card{left:9px;top:53px}.hint{font-size:9px;bottom:10px}.badge{left:9px;bottom:60px}.bottomBtns{overflow:auto}.bottomBtns .btn{white-space:nowrap}}
 </style>
 </head>
 <body>
 <div id="app">
 <aside id="side">
-  <div class="brand">EARTH <b>THROUGH TIME</b></div>
-  <div class="sub">A 4.54 billion year interactive journey</div>
-  <h3>TIMELINE</h3><div id="chapters"></div>
-  <h3>EXPLORE</h3>
-  <button class="chapter" onclick="showTip('How to explore','Drag the globe with one finger. Pinch is supported by Safari. Tap a land region or ocean to learn about that place at the selected time.')">👆 How to explore</button>
-  <button class="chapter" onclick="showTip('For curious minds','Everything is written for young explorers. Try the timeline, then tap a region and press “Hear the story”.')">⭐ Explorer tips</button>
+<div class="logo">EARTH <span>THROUGH TIME</span></div>
+<div class="sub">Spin the planet and travel through 4.54 billion years of Earth history.</div>
+<h3>TIME TRAVEL</h3><div id="eras"></div>
+<h3>EXPLORER</h3>
+<div class="tools">
+<button class="btn" onclick="story()">▶️ Story mode</button>
+<button class="btn" onclick="tell()">🎙️ Tell me</button>
+<button class="btn" onclick="reset()">↺ Reset</button>
+<button class="btn" onclick="quiz()">❓ Quiz</button>
+</div>
+<div class="sub" style="margin-top:8px">🔊 Uses your iPad's American English voice when available.</div>
+<h3>DISCOVER</h3>
+<div class="tools">
+<button class="btn" onclick="topic('life')">🦖 Life</button><button class="btn" onclick="topic('science')">🔬 Science</button>
+<button class="btn" onclick="topic('events')">☄️ Events</button><button class="btn" onclick="topic('humans')">🧑 Humans</button>
+</div>
 </aside>
 <section id="main">
 <div class="stars"></div>
-<div id="topbar"><button id="menu" onclick="side.classList.toggle('open')">☰</button>
-  <button class="nav active">🌍 Globe</button><button class="nav">🦖 Life</button><button class="nav">🌿 Plants</button><button class="nav">🌋 Environments</button><button class="nav">☄️ Events</button><button class="nav">🔬 Discoveries</button><button class="nav">🧑 Humans</button><button class="nav" onclick="quiz()">❓ Quiz</button>
-</div>
-<div id="periodCard"><span class="cyan" id="era">Mesozoic</span><b id="title">Jurassic</b><span class="muted" id="age">~170 million years ago</span></div>
-<canvas id="globe"></canvas>
-<div id="hint">Drag to rotate • pinch/scroll to zoom • tap a region to explore</div>
-<div id="panel"><button class="close" onclick="closePanel()">×</button><div class="panelTitle" id="pTitle"></div><div class="panelAge" id="pAge"></div><div class="panelBody" id="pBody"></div><button class="listen" id="listen">🔊 Hear the story</button></div>
+<div id="top"><button class="topbtn" id="menu" onclick="side.classList.toggle('open')">☰</button><button class="topbtn active">🌍 Globe</button><button class="topbtn" onclick="topic('life')">🦖 Life</button><button class="topbtn" onclick="topic('events')">☄️ Events</button><button class="topbtn" onclick="topic('science')">🔬 Science</button><button class="topbtn" onclick="topic('humans')">🧑 Humans</button></div>
+<div class="card"><span class="eraName" id="era"></span><b id="title"></b><small id="ago"></small></div>
+<canvas id="globe"></canvas><div class="badge" id="badge"></div><div class="hint">👆 Drag to spin • pinch to zoom • tap land or glowing discoveries</div>
+<div id="panel"><button class="close" onclick="closePanel()">×</button><div class="icon" id="pi"></div><div class="ptitle" id="pt"></div><div class="page" id="pa"></div><div class="body" id="pb"></div><button class="speak" id="hear">🔊 Hear the story</button><button class="speak guide" id="guide">🎙️ Enthusiastic guide</button></div>
 </section>
-<footer id="bottom">
-<div class="timelineTop"><span>TIME TRAVEL</span><b id="timeReadout">~170 million years ago</b></div>
-<input id="slider" type="range" min="0" max="1000" value="750" aria-label="Earth timeline">
-<div class="labels"><span>Earth forms</span><span>First life</span><span>Pangaea</span><span>Dinosaurs</span><span>Mammals</span><span>Humans</span><span>NOW</span></div>
-<div class="controls"><button class="ctl" id="play" onclick="togglePlay()">▶ Play story</button><button class="ctl" onclick="setMode('ancient')">🌎 Ancient Earth</button><button class="ctl" onclick="setMode('modern')">🌍 Modern Earth</button><button class="ctl" onclick="toggleLabels()">🏷 Labels</button></div>
-</footer>
+<footer id="bottom"><div class="line"><span>TIME TRAVEL</span><b id="read"></b></div><input id="slider" class="range" type="range" min="0" max="1000" value="760"><div class="labels"><span>Earth forms</span><span>First life</span><span>Oxygen</span><span>Pangaea</span><span>Dinosaurs</span><span>Ice ages</span><span>NOW</span></div><div class="bottomBtns"><button class="btn" onclick="story()">▶ Story mode</button><button class="btn" onclick="setView('ancient')">🌎 Ancient</button><button class="btn" onclick="setView('modern')">🌍 Modern</button><button class="btn" onclick="reset()">↺ Reset globe</button></div></footer>
 </div>
 <script>
-"use strict";
-const cv=document.getElementById("globe"),ctx=cv.getContext("2d"),slider=document.getElementById("slider");
-const side=document.getElementById("side"),chapters=document.getElementById("chapters"),panel=document.getElementById("panel");
-const era=document.getElementById("era"),title=document.getElementById("title"),age=document.getElementById("age"),timeReadout=document.getElementById("timeReadout");
-const pTitle=document.getElementById("pTitle"),pAge=document.getElementById("pAge"),pBody=document.getElementById("pBody"),listen=document.getElementById("listen");
-let W=0,H=0,dpr=1,rotX=.12,rotY=-.5,zoom=1,drag=false,lx=0,ly=0,playing=false,showNames=true,mode="ancient",raf;
-
-const periods=[
- {v:0,name:"Earth forms",era:"Hadean",ago:"4.54 billion years ago",desc:"A young Earth forms from rocky material around the newborn Sun.",life:"No dinosaurs yet — Earth is extremely hot.",regions:["Early Earth"]},
- {v:120,name:"First life",era:"Archean",ago:"~3.5 billion years ago",desc:"Tiny living cells appear in ancient oceans.",life:"Microbial life dominates the planet.",regions:["Ancient oceans"]},
- {v:260,name:"Oxygen rises",era:"Proterozoic",ago:"~2.4 billion years ago",desc:"Photosynthetic microbes release oxygen, changing the atmosphere.",life:"Simple cells thrive in the seas.",regions:["Ancient oceans"]},
- {v:500,name:"Cambrian",era:"Paleozoic",ago:"~540 million years ago",desc:"Animal diversity rapidly expands in the seas.",life:"Trilobites and other early animals appear.",regions:["Gondwana","Laurentia"]},
- {v:650,name:"Pangaea",era:"Late Paleozoic",ago:"~300 million years ago",desc:"Huge continental blocks assemble into the supercontinent Pangaea.",life:"Reptiles, amphibians and early relatives of mammals live on land.",regions:["Pangaea"]},
- {v:750,name:"Jurassic",era:"Mesozoic",ago:"~170 million years ago",desc:"Pangaea is breaking apart. Warm seas and lush forests cover much of the world.",life:"Dinosaurs are widespread; marine reptiles rule the oceans.",regions:["North America","South America","Africa","Europe","Asia","India","Australia","Antarctica"]},
- {v:835,name:"Cretaceous",era:"Mesozoic",ago:"~66 million years ago",desc:"Continents continue drifting toward their modern positions.",life:"Flowering plants spread and many dinosaur groups thrive.",regions:["North America","South America","Africa","Europe","Asia","India","Australia","Antarctica"]},
- {v:930,name:"Ice ages",era:"Quaternary",ago:"~2.6 million years ago",desc:"Repeated glacial cycles reshape landscapes.",life:"Mammoths, giant ground sloths and early humans share landscapes.",regions:["North America","South America","Africa","Europe","Asia","Australia"]},
- {v:1000,name:"Present day",era:"Holocene",ago:"Today",desc:"Modern continents occupy their familiar positions.",life:"Humans live alongside millions of other species.",regions:["North America","South America","Africa","Europe","Asia","Australia","Antarctica"]}
+const C=document.getElementById('globe'),X=C.getContext('2d'),S=document.getElementById('slider'),side=document.getElementById('side'),eras=document.getElementById('eras'),panel=document.getElementById('panel');
+let W,H,dpr,rx=.16,ry=-.45,z=1,drag=false,lx=0,ly=0,down=0,view='ancient',playing=false,timer;
+const P=[
+{v:0,n:'Earth forms',e:'Hadean',a:'4.54 billion years ago',type:'young',story:'Welcome, explorer! Earth is about four and a half billion years old. It is hot, rocky and volcanic, with no dinosaurs, forests or people yet.'},
+{v:130,n:'First life',e:'Archean',a:'~3.5 billion years ago',type:'microbe',story:'Life has arrived! Tiny cells live in ancient oceans. They are too small to see from space, but they are beginning an amazing story.'},
+{v:260,n:'Oxygen rises',e:'Proterozoic',a:'~2.4 billion years ago',type:'oxygen',story:'Tiny photosynthetic microbes are releasing oxygen. Over a huge amount of time, this changes Earth and helps make more complex life possible.'},
+{v:500,n:'Cambrian',e:'Paleozoic',a:'~540 million years ago',type:'cambrian',story:'The oceans are getting busy! Many strange early animals appear, including trilobites and creatures with new kinds of bodies.'},
+{v:650,n:'Pangaea',e:'Late Paleozoic',a:'~300 million years ago',type:'pangaea',story:'Much of Earths land is joined into the giant supercontinent Pangaea. Imagine walking across enormous stretches of land without crossing an ocean!'},
+{v:760,n:'Jurassic',e:'Mesozoic',a:'~170 million years ago',type:'dino',story:'Welcome to the Jurassic! Giant dinosaurs roam forests and plains, while warm seas contain amazing marine reptiles. The continents are slowly splitting apart.'},
+{v:835,n:'Cretaceous',e:'Mesozoic',a:'~90 million years ago',type:'dino',story:'Flowering plants spread and dinosaurs are incredibly diverse. Continents move toward modern positions. Later, a huge asteroid changes life on Earth.'},
+{v:930,n:'Ice ages',e:'Quaternary',a:'~2.6 million years ago',type:'ice',story:'Huge glaciers advance and retreat. Mammoths and other giant animals roam cold landscapes while early humans learn to survive and adapt.'},
+{v:1000,n:'Present day',e:'Holocene',a:'Today',type:'today',story:'This is our home. Modern continents are in familiar positions, millions of species live here, and humans are a major force shaping the planet.'}
 ];
-
+const landModern={
+'North America':[[72,-168],[62,-150],[58,-135],[50,-125],[42,-124],[32,-117],[24,-110],[18,-97],[24,-88],[31,-84],[38,-78],[47,-67],[55,-60],[63,-75],[70,-90]],
+'South America':[[12,-81],[5,-77],[-4,-79],[-15,-74],[-25,-70],[-40,-72],[-55,-68],[-52,-58],[-40,-50],[-22,-42],[-5,-48],[7,-60]],
+'Africa':[[35,-17],[32,0],[30,15],[25,32],[10,43],[-10,50],[-25,42],[-35,25],[-34,10],[-20,-5],[-5,-16],[15,-17]],
+'Europe':[[71,-10],[60,-5],[58,10],[50,3],[45,15],[40,25],[47,35],[58,35],[65,25],[70,10]],
+'Asia':[[75,40],[70,70],[72,100],[65,135],[55,150],[45,145],[35,140],[20,125],[8,105],[5,85],[20,65],[30,45],[45,35],[58,40]],
+'Australia':[[-11,113],[-20,120],[-35,128],[-39,145],[-30,153],[-17,150],[-10,140],[-12,128]],
+'Antarctica':[[-60,-180],[-67,-140],[-72,-90],[-70,-30],[-73,30],[-70,90],[-65,140],[-60,180]]
+};
+const landDino={
+'North America':[[65,-135],[55,-120],[45,-115],[35,-105],[25,-95],[20,-85],[30,-75],[45,-70],[60,-80]],
+'South America':[[5,-65],[-5,-55],[-20,-50],[-40,-55],[-55,-45],[-40,-30],[-20,-25],[-5,-35]],
+'Africa':[[35,-5],[30,10],[20,25],[5,35],[-15,30],[-35,20],[-30,0],[-10,-15],[15,-15]],
+'Europe':[[55,-15],[60,5],[55,20],[45,25],[40,10],[45,-5]],
+'Asia':[[60,35],[65,70],[55,105],[40,125],[25,110],[20,80],[30,55],[45,35]],
+'India':[[5,65],[-5,75],[-15,72],[-12,60],[-2,58]],
+'Australia':[[-15,115],[-30,130],[-40,145],[-30,155],[-15,145]],
+'Antarctica':[[-55,-40],[-70,0],[-65,60],[-55,100],[-50,40]]
+};
+const pangaea={'Pangaea':[[65,-80],[55,-50],[45,-35],[30,-25],[15,-20],[0,-25],[-15,-15],[-30,-5],[-45,15],[-45,35],[-30,50],[-10,60],[10,55],[25,45],[40,30],[55,10],[65,-10],[70,-35]]};
 const facts={
-"North America":{text:"In the Jurassic, much of this area belonged to Laurasia. Warm forests and shallow seas supported many reptiles.",life:"Allosaurus, stegosaurs and early birds.",discover:"Fossils help scientists reconstruct ancient ecosystems.",tag:["dinosaurs","forests","shallow seas"]},
-"South America":{text:"Large parts of South America were connected within the southern supercontinent Gondwana.",life:"Sauropods and theropods roamed inland environments.",discover:"Rock layers preserve clues about ancient climates.",tag:["Gondwana","dinosaurs"]},
-"Africa":{text:"Africa was part of Gondwana. Rift zones and changing seas helped begin the long breakup of the supercontinent.",life:"Large sauropods and theropods lived here.",discover:"Fossils and footprints reveal how dinosaurs moved and lived.",tag:["Gondwana","footprints"]},
-"Europe":{text:"Europe was a patchwork of islands and shallow seas during parts of the Jurassic.",life:"Marine reptiles, pterosaurs and dinosaurs lived nearby.",discover:"Ammonites are useful fossils for dating Jurassic rocks.",tag:["islands","ammonites"]},
-"Asia":{text:"Asia was assembled from several moving pieces. Some regions were separated by ancient seas.",life:"Sauropods, theropods and many marine animals.",discover:"Fossils from deserts and mountains preserve ancient environments.",tag:["mountains","ancient seas"]},
-"India":{text:"India was an island continent drifting northward after separating from Gondwana.",life:"Dinosaurs lived on this travelling landmass.",discover:"Indian fossil beds record dinosaur eggs and nesting sites.",tag:["island continent","dinosaur eggs"]},
-"Australia":{text:"Australia was part of Gondwana and sat much farther south than today.",life:"Dinosaurs and other reptiles lived in cool seasonal environments.",discover:"Polar dinosaur fossils show that dinosaurs could live in cold regions.",tag:["Gondwana","polar dinosaurs"]},
-"Antarctica":{text:"Antarctica was not always covered by a giant ice sheet. In the Jurassic it had forests and milder conditions.",life:"Dinosaurs and other reptiles lived in Antarctic ecosystems.",discover:"Fossil leaves and bones reveal its surprisingly green past.",tag:["ancient forests","polar dinosaurs"]},
-"Pangaea":{text:"Pangaea was a giant supercontinent. Imagine being able to walk between areas that are now separated by oceans!",life:"Early dinosaurs appeared near the end of this broad interval.",discover:"Plate tectonics explains how continents can slowly move.",tag:["supercontinent","plate tectonics"]},
-"Laurentia":{text:"Laurentia was an ancient continental block that later became much of North America.",life:"Early marine animals lived around its shores.",discover:"Ancient rocks preserve evidence of vanished oceans.",tag:["ancient continent","oceans"]},
-"Gondwana":{text:"Gondwana was a huge southern supercontinent containing pieces of today's South America, Africa, Antarctica, Australia and India.",life:"Many early land animals lived across its landscapes.",discover:"Matching rocks and fossils across continents helped reveal continental drift.",tag:["supercontinent","continental drift"]},
-"Ancient oceans":{text:"Earth's earliest oceans were the main home for life.",life:"Microbes and later simple multicellular organisms.",discover:"Microscopic fossils and chemical clues reveal ancient life.",tag:["oceans","first life"]}
+'North America':['🦖','North America','In the dinosaur eras, forests, floodplains and shallow seas supported huge ecosystems.','Giant sauropods, theropods, birds and other reptiles lived here.','Fossils, bones and trackways help scientists rebuild ancient landscapes.'],
+'South America':['🦕','South America','This land was part of Gondwana and supported enormous dinosaurs and many other reptiles.','Sauropods and theropods were important land animals.','Ancient rocks reveal changing rivers, volcanoes and climates.'],
+'Africa':['🌋','Africa','Africa contains rocks and fossils from many chapters of Earth history and was involved in the breakup of Gondwana.','Dinosaurs, reptiles and marine animals lived in changing environments.','Fossil footprints can show how animals moved through ancient landscapes.'],
+'Europe':['🐚','Europe','Parts of Jurassic Europe were islands surrounded by warm shallow seas.','Marine reptiles, pterosaurs, dinosaurs and ammonites lived here.','Ammonites are useful index fossils for comparing rock ages.'],
+'Asia':['🏔️','Asia','Asia was assembled from many moving pieces, creating mountains, seas and deserts.','Sauropods, theropods and marine animals lived in different regions.','Fossils in mountains and deserts reveal vanished environments.'],
+'India':['🥚','India','India travelled north after separating from Gondwana.','Dinosaur nesting sites show that dinosaurs reproduced here.','Eggs, nests and fossil bones are important clues.'],
+'Australia':['❄️','Australia','Australia was once part of Gondwana and sat much farther south than today.','Dinosaurs lived through strong seasonal changes.','Polar dinosaur fossils show some dinosaurs tolerated cold, dark seasons.'],
+'Antarctica':['🌲','Antarctica','Antarctica was not always an icy desert. Some ancient periods had forests and much milder conditions.','Dinosaurs and ancient plants lived here.','Fossil leaves and bones reveal a surprisingly green ancient Antarctica.'],
+'Pangaea':['🌎','Pangaea','Pangaea was a giant supercontinent made from pieces of todays continents.','Reptiles, amphibians and early dinosaurs lived on its landscapes.','Matching rocks and fossils on separated continents helped scientists understand continental drift.'],
+'Ocean life':['🫧','Ancient oceans','Earths earliest oceans were the main home for life. Tiny cells slowly changed the chemistry of the planet.','Microbes and later simple animals lived in the seas.','Microscopic fossils and chemical clues reveal ancient life.']
 };
-
-function resize(){dpr=Math.min(devicePixelRatio||1,2);W=cv.clientWidth;H=cv.clientHeight;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);draw()}
-addEventListener("resize",resize);
-
-function period(){let v=+slider.value;let best=periods[0];for(const p of periods)if(Math.abs(p.v-v)<Math.abs(best.v-v))best=p;return best}
-function setTime(v){slider.value=v;const p=period();era.textContent=p.era;title.textContent=p.name;age.textContent=p.ago;timeReadout.textContent=p.ago;renderChapters();draw()}
-function renderChapters(){chapters.innerHTML="";const p=period();periods.forEach(x=>{const b=document.createElement("button");b.className="chapter"+(x===p?" active":"");b.innerHTML="<strong>"+x.name+"</strong><small>"+x.ago+"</small>";b.onclick=()=>setTime(x.v);chapters.appendChild(b)})}
-
-function project(lat,lon,cx,cy,r){let L=(lon*Math.PI/180)+rotY,A=lat*Math.PI/180;let x=Math.cos(A)*Math.sin(L),y=Math.sin(A)*Math.cos(rotX)-Math.cos(A)*Math.cos(L)*Math.sin(rotX),z=Math.sin(A)*Math.sin(rotX)+Math.cos(A)*Math.cos(L)*Math.cos(rotX);return {x:cx+r*x,y:cy-r*y,z}}
-function poly(points,cx,cy,r){ctx.beginPath();points.forEach((p,i)=>{const q=project(p[0],p[1],cx,cy,r);if(i===0)ctx.moveTo(q.x,q.y);else ctx.lineTo(q.x,q.y)});ctx.closePath();return points.map(p=>project(p[0],p[1],cx,cy,r))}
-const modern={
-"North America":[[70,-165],[60,-140],[52,-125],[30,-118],[15,-100],[10,-80],[25,-70],[50,-55],[72,-65]],
-"South America":[[12,-82],[-5,-75],[-25,-70],[-55,-70],[-55,-55],[-20,-35],[5,-45],[12,-60]],
-"Africa":[[35,-15],[35,40],[15,50],[-35,45],[-35,15],[-5,-15]],
-"Europe":[[70,-10],[65,35],[50,45],[35,30],[40,0],[50,-10]],
-"Asia":[[75,45],[65,90],[55,145],[25,150],[5,120],[10,60],[30,35],[55,35]],
-"India":[[25,68],[8,78],[5,90],[22,85]],
-"Australia":[[-10,112],[-12,155],[-40,150],[-38,115]],
-"Antarctica":[[-65,-180],[-65,180],[-90,180],[-90,-180]]
-};
-const jurassic={
-"North America":[[55,-130],[45,-105],[35,-90],[20,-100],[25,-80],[45,-70],[60,-80]],
-"Europe":[[55,-25],[60,10],[50,35],[35,20],[40,-5]],
-"Asia":[[55,30],[60,80],[45,130],[20,115],[25,60],[35,35]],
-"Africa":[[30,-10],[25,35],[-30,40],[-35,0],[-5,-25]],
-"South America":[[10,-70],[-5,-60],[-45,-55],[-55,-35],[-15,-35],[10,-45]],
-"India":[[-5,55],[-25,65],[-30,80],[-5,80]],
-"Australia":[[-25,110],[-40,130],[-45,155],[-25,160],[-15,135]],
-"Antarctica":[[-55,-10],[-60,80],[-75,120],[-75,-80]]
-};
-function shapes(){const p=period(); if(p.v<=260)return {"Ancient oceans":[[65,-180],[65,180],[-65,180],[-65,-180]]}; if(p.v<=540)return {"Gondwana":[[-5,-70],[-25,-40],[-45,-10],[-55,40],[-35,100],[-5,120],[20,70],[20,10]] ,"Laurentia":[[50,-140],[70,-100],[55,-60],[30,-80],[35,-120]]}; if(p.v<=690)return {"Pangaea":[[60,-100],[55,-30],[45,20],[35,75],[5,100],[-35,80],[-55,20],[-35,-30],[-5,-90]]}; return p.v<900?jurassic:modern}
-function draw(){if(!W||!H)return;ctx.clearRect(0,0,W,H);const cx=W*.52,cy=H*.53,r=Math.min(W*.34,H*.39)*zoom;
-let g=ctx.createRadialGradient(cx-r*.25,cy-r*.3,r*.05,cx,cy,r*1.1);g.addColorStop(0,"#1d90bd");g.addColorStop(.55,"#075075");g.addColorStop(1,"#021526");ctx.fillStyle=g;ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.fill();
-ctx.save();ctx.beginPath();ctx.arc(cx,cy,r,0,Math.PI*2);ctx.clip();
-for(let lat=-60;lat<=60;lat+=30){ctx.beginPath();for(let lon=-180;lon<=180;lon+=5){const q=project(lat,lon,cx,cy,r);if(q.z>.0){if(lon===-180)ctx.moveTo(q.x,q.y);else ctx.lineTo(q.x,q.y)}}ctx.strokeStyle="rgba(130,220,255,.13)";ctx.lineWidth=1;ctx.stroke()}
-for(let lon=-150;lon<=180;lon+=30){ctx.beginPath();for(let lat=-90;lat<=90;lat+=4){const q=project(lat,lon,cx,cy,r);if(q.z>0){if(lat===-90)ctx.moveTo(q.x,q.y);else ctx.lineTo(q.x,q.y)}}ctx.strokeStyle="rgba(130,220,255,.10)";ctx.stroke()}
-const sh=shapes(),p=period();for(const [name,pts] of Object.entries(sh)){const qs=poly(pts,cx,cy,r);const visible=qs.some(q=>q.z>.02);if(!visible)continue;ctx.fillStyle=p.v<500?"#6fa66c":"#78ad68";ctx.fill();ctx.strokeStyle="#c5df91";ctx.lineWidth=1.3;ctx.stroke();if(showNames){const q=qs[Math.floor(qs.length/2)];if(q.z>.1){ctx.fillStyle="#f4fbef";ctx.font="700 12px -apple-system,BlinkMacSystemFont,sans-serif";ctx.textAlign="center";ctx.fillText(name,q.x,q.y)}}}
-if(p.v>=700){for(let i=0;i<10;i++){const q=project(5+i*4,-130+i*26,cx,cy,r);if(q.z>.2){ctx.fillStyle="#f7f7ee";ctx.globalAlpha=.18;ctx.beginPath();ctx.ellipse(q.x,q.y,35,8,0,0,Math.PI*2);ctx.fill()}}}
-ctx.restore();ctx.strokeStyle="rgba(63,216,255,.55)";ctx.lineWidth=2;ctx.beginPath();ctx.arc(cx,cy,r+2,0,Math.PI*2);ctx.stroke();
-if(p.v>=650&&p.v<900){const dinos=[[-5,-70,"🦕"],[20,40,"🦖"],[-20,110,"🦕"],[30,-10,"🦅"]];for(const d of dinos){const q=project(d[0],d[1],cx,cy,r);if(q.z>.25){ctx.font="22px serif";ctx.textAlign="center";ctx.fillText(d[2],q.x,q.y)}}}
-}
-function nearestRegion(x,y){const cx=W*.52,cy=H*.53,r=Math.min(W*.34,H*.39)*zoom;let best=null,bd=Infinity;for(const name of Object.keys(shapes())){let pts=shapes()[name],sum={x:0,y:0,z:0};for(const p of pts){const q=project(p[0],p[1],cx,cy,r);sum.x+=q.x;sum.y+=q.y;sum.z+=q.z}sum.x/=pts.length;sum.y/=pts.length;let d=(x-sum.x)**2+(y-sum.y)**2;if(sum.z>.05&&d<bd){bd=d;best=name}}return bd<r*r*.28?best:null}
-cv.onpointerdown=e=>{drag=true;lx=e.clientX;ly=e.clientY;cv.setPointerCapture(e.pointerId)}
-cv.onpointermove=e=>{if(!drag)return;rotY+=(e.clientX-lx)/rScale();rotX+=(e.clientY-ly)/rScale();rotX=Math.max(-1.2,Math.min(1.2,rotX));lx=e.clientX;ly=e.clientY;draw()}
-cv.onpointerup=e=>{if(Math.hypot(e.clientX-lx,e.clientY-ly)<8){const reg=nearestRegion(e.clientX,e.clientY);if(reg)openPanel(reg)}drag=false}
-cv.onwheel=e=>{e.preventDefault();zoom=Math.max(.72,Math.min(1.55,zoom-e.deltaY*.0007));draw()}
-function rScale(){return Math.max(180,Math.min(W,H))}
-function openPanel(reg){const p=period(),f=facts[reg]||facts["Ancient oceans"];pTitle.textContent=reg;pAge.textContent=p.name+" • "+p.ago;pBody.innerHTML="<p>"+f.text+"</p><div class='fact'>🦖 <b>Life:</b> "+f.life+"</div><div class='fact'>🔬 <b>Science:</b> "+f.discover+"</div><div class='fact'>💡 <b>Big idea:</b> Continents move only a few centimetres per year — about as fast as your fingernails grow.</div><div>"+f.tag.map(x=>"<span class='tag'>"+x+"</span>").join("")+"</div>";panel.classList.add("show");listen.onclick=()=>speak(reg,p,f)}
-function closePanel(){panel.classList.remove("show");speechSynthesis.cancel();listen.classList.remove("playing");listen.textContent="🔊 Hear the story"}
-function speak(reg,p,f){speechSynthesis.cancel();const u=new SpeechSynthesisUtterance("Welcome to "+reg+" during the "+p.name+" period, "+p.ago+". "+f.text+" "+f.life+" Here is a cool science clue: "+f.discover);u.rate=.9;u.pitch=1.05;u.onstart=()=>{listen.classList.add("playing");listen.textContent="🔊 Playing story…"};u.onend=()=>{listen.classList.remove("playing");listen.textContent="🔊 Hear the story"};speechSynthesis.speak(u)}
-function showTip(t,b){pTitle.textContent=t;pAge.textContent="Explorer guide";pBody.innerHTML="<p>"+b+"</p>";panel.classList.add("show");listen.style.display="none"}
-function quiz(){const p=period();const q=p.name==="Jurassic"?"Which animals were widespread? A) Dinosaurs B) Mammoths C) Humans":p.name==="Pangaea"?"What was Pangaea? A) A dinosaur B) A supercontinent C) An ocean":"Which force slowly moves continents? A) Plate tectonics B) Moonlight C) Thunder";const a=prompt(q);if(a)alert((a.trim().toLowerCase().startsWith("a")&&p.name!=="Pangaea")||(a.trim().toLowerCase().startsWith("b")&&p.name==="Pangaea")||(a.trim().toLowerCase().startsWith("a")&&p.name!=="Jurassic"&&p.name!=="Pangaea")?"Great job! 🌟":"Nice try! Explore the globe and try again.")}
-function toggleLabels(){showNames=!showNames;draw()}
-function setMode(m){mode=m;zoom=1;rotY=m==="modern"?-.35:-.5;draw()}
-function togglePlay(){playing=!playing;document.getElementById("play").textContent=playing?"⏸ Pause story":"▶ Play story";if(playing)step()}
-function step(){if(!playing)return;let v=+slider.value+3;if(v>1000){playing=false;document.getElementById("play").textContent="▶ Play story";return}setTime(v);setTimeout(step,110)}
-slider.oninput=()=>setTime(+slider.value);
-renderChapters();resize();setTime(750);
+const markers=[
+{v:760,lat:42,lon:-105,icon:'🦖',name:'Dinosaur hotspot',text:'Imagine a giant Jurassic sauropod browsing above the forest canopy!',extra:'Dinosaurs',},
+{v:760,lat:8,lon:25,icon:'🌋',name:'Ancient volcano',text:'Volcanoes were part of the changing Jurassic landscape.',extra:'Volcanoes'},
+{v:835,lat:22,lon:-89,icon:'☄️',name:'Asteroid impact',text:'About 66 million years ago, a large asteroid struck near the Yucatán region. The impact caused enormous environmental changes and is linked to the end-Cretaceous extinction.',extra:'Mass extinction'},
+{v:930,lat:55,lon:-100,icon:'🦣',name:'Ice-age giants',text:'Mammoths and other giant mammals lived across cold grasslands during parts of the Ice Age.',extra:'Ice age'},
+{v:930,lat:2,lon:35,icon:'🧑',name:'Early human camp',text:'Early humans learned to use tools, cooperate and adapt to changing environments.',extra:'Human evolution'},
+{v:500,lat:20,lon:90,icon:'🐚',name:'Cambrian seas',text:'Cambrian oceans were full of strange early animals, including trilobites.',extra:'Early animals'},
+{v:260,lat:-5,lon:30,icon:'🫧',name:'Oxygen revolution',text:'Photosynthetic microbes helped oxygen build up in Earths atmosphere.',extra:'Earth chemistry'}
+];
+function period(){let v=+S.value,b=P[0];for(const p of P)if(Math.abs(p.v-v)<Math.abs(b.v-v))b=p;return b}
+function resize(){dpr=Math.min(devicePixelRatio||1,2);W=C.clientWidth;H=C.clientHeight;C.width=W*dpr;C.height=H*dpr;X.setTransform(dpr,0,0,dpr,0,0);draw()}
+function project(lat,lon,cx,cy,r){let a=lat*Math.PI/180,b=lon*Math.PI/180+ry,xx=Math.cos(a)*Math.sin(b),yy=Math.sin(a)*Math.cos(rx)-Math.cos(a)*Math.cos(b)*Math.sin(rx),zz=Math.sin(a)*Math.sin(rx)+Math.cos(a)*Math.cos(b)*Math.cos(rx);return{x:cx+r*xx,y:cy-r*yy,z:zz,vis:zz>-.08}}
+function poly(points,cx,cy,r){return points.map(q=>project(q[0],q[1],cx,cy,r))}
+function currentMap(){let p=period();if(view==='modern'||p.v===1000)return landModern;if(p.v===650)return pangaea;if(p.v>=700&&p.v<900)return landDino;return pangaea}
+function draw(){if(!W)return;X.clearRect(0,0,W,H);const cx=W*.53,cy=H*.48,r=Math.min(W,H)*.35*z;const g=X.createRadialGradient(cx-r*.3,cy-r*.35,r*.04,cx,cy,r*1.05);g.addColorStop(0,'#1590bd');g.addColorStop(.5,'#075779');g.addColorStop(1,'#021724');X.fillStyle=g;X.beginPath();X.arc(cx,cy,r,0,7);X.fill();X.save();X.beginPath();X.arc(cx,cy,r,0,7);X.clip();
+for(let lat=-60;lat<=60;lat+=30){X.strokeStyle='rgba(130,225,255,.14)';X.beginPath();for(let lo=-180;lo<=180;lo+=8){let q=project(lat,lo,cx,cy,r);if(q.vis){if(lo===-180)X.moveTo(q.x,q.y);else X.lineTo(q.x,q.y)}}X.stroke()}
+for(let lo=-150;lo<=150;lo+=30){X.beginPath();for(let lat=-88;lat<=88;lat+=5){let q=project(lat,lo,cx,cy,r);if(q.vis){if(lat===-88)X.moveTo(q.x,q.y);else X.lineTo(q.x,q.y)}}X.stroke()}
+for(const [name,pts] of Object.entries(currentMap())){let q=poly(pts,cx,cy,r),vis=q.filter(a=>a.vis);if(vis.length<2)continue;X.beginPath();let started=false;for(const a of q){if(a.vis){if(!started){X.moveTo(a.x,a.y);started=true}else X.lineTo(a.x,a.y)}else if(started){X.closePath();started=false}}if(started)X.closePath();let lg=X.createLinearGradient(0,cy-r,0,cy+r);lg.addColorStop(0,'#c5df9b');lg.addColorStop(.5,'#75aa68');lg.addColorStop(1,'#3f684b');X.fillStyle=lg;X.shadowColor='#00160b';X.shadowBlur=8;X.fill();X.shadowBlur=0;X.strokeStyle='#d7e8a9';X.lineWidth=1.1;X.stroke();X.globalAlpha=.2;X.strokeStyle='#fff';for(let i=0;i<4;i++){X.beginPath();for(let j=0;j<q.length;j++){let a=q[j];if(a.vis){if(j===0)X.moveTo(a.x+i*3,a.y+i*2);else X.lineTo(a.x+i*3,a.y+i*2)}}X.stroke()}X.globalAlpha=1;if(name!=='Pangaea'){let c=q.filter(a=>a.vis);if(c.length){let mx=c.reduce((s,a)=>s+a.x,0)/c.length,my=c.reduce((s,a)=>s+a.y,0)/c.length;X.font='bold 10px -apple-system,sans-serif';X.textAlign='center';X.strokeStyle='#17341f';X.lineWidth=3;X.strokeText(name,mx,my);X.fillStyle='#f1f8df';X.fillText(name,mx,my)}}}
+X.restore();X.strokeStyle='rgba(91,218,255,.55)';X.lineWidth=2;X.beginPath();X.arc(cx,cy,r,0,7);X.stroke();
+const v=+S.value;let life=[];if(v>=700&&v<900)life=[['🦕',40,-105],['🦖',18,15],['🪽',35,65]];else if(v>=900)life=[['🦣',55,-100],['🦥',-15,-60],['🧑',0,35]];else if(v>=450&&v<620)life=[['🐚',15,85],['🦐',-5,120]];else if(v>=100&&v<450)life=[['🦠',-5,30],['🫧',12,70]];life.forEach((a,i)=>{let q=project(a[1],a[2],cx,cy,r*1.02);if(q.vis){X.font='24px system-ui';X.textAlign='center';X.fillText(a[0],q.x,q.y+Math.sin(Date.now()/400+i)*4)}})
+markers.forEach(m=>{if(Math.abs(m.v-v)>45)return;let q=project(m.lat,m.lon,cx,cy,r*1.01);if(q.vis){let pulse=5+Math.sin(Date.now()/240)*2;X.fillStyle='#43ddff';X.shadowColor='#43ddff';X.shadowBlur=16;X.beginPath();X.arc(q.x,q.y,pulse,0,7);X.fill();X.shadowBlur=0;X.font='16px system-ui';X.fillText(m.icon,q.x,q.y-11)}})
+const p=period();document.getElementById('era').textContent=p.e;document.getElementById('title').textContent=p.n;document.getElementById('ago').textContent=p.a;document.getElementById('read').textContent=p.a;document.getElementById('badge').textContent=p.type==='dino'?'🦖 Dinosaurs are on the move':p.type==='ice'?'🦣 Ice-age giants are roaming':p.type==='young'?'🌋 Young volcanic Earth':p.type==='today'?'🌍 Modern Earth':'✨ Life is changing';if(playing)requestAnimationFrame(draw)}
+function renderEras(){let p=period();eras.innerHTML=P.map(x=>`<button class="era ${x===p?'active':''}" onclick="setTime(${x.v})"><strong>${x.n}</strong><small>${x.a}</small></button>`).join('')}
+function setTime(v){S.value=v;renderEras();closePanel();draw()}
+S.oninput=()=>{renderEras();draw()};
+function hit(x,y){const cx=W*.53,cy=H*.48,r=Math.min(W,H)*.35*z,v=+S.value;for(const m of markers){if(Math.abs(m.v-v)>45)continue;let q=project(m.lat,m.lon,cx,cy,r*1.01);if(q.vis&&Math.hypot(x-q.x,y-q.y)<27){openMarker(m);return}}for(const [name,pts] of Object.entries(currentMap())){let q=poly(pts,cx,cy,r).filter(a=>a.vis);if(q.length>2&&inside(x,y,q)){openRegion(name);return}}openRegion('Ocean life')}
+function inside(x,y,p){let ok=false;for(let i=0,j=p.length-1;i<p.length;j=i++){let a=p[i],b=p[j],h=((a.y>y)!=(b.y>y))&&(x<(b.x-a.x)*(y-a.y)/(b.y-a.y)+a.x);if(h)ok=!ok}return ok}
+function openRegion(name){let f=facts[name]||facts['Ocean life'],p=period();document.getElementById('pi').textContent=f[0];document.getElementById('pt').textContent=f[1];document.getElementById('pa').textContent=p.a;document.getElementById('pb').innerHTML=`<div>${f[2]}</div><div class="fact"><b>🦕 Life here:</b> ${f[3]}</div><div class="fact"><b>🔬 Scientist clue:</b> ${f[4]}</div><div class="fact"><span class="tag">${p.n}</span><span class="tag">Explore</span></div>`;panel.style.display='block';document.getElementById('hear').onclick=()=>speak(`${f[1]}. ${f[2]} ${f[3]} ${f[4]}`);document.getElementById('guide').onclick=()=>speak(`Hey explorers, check this out! ${f[2]} ${f[3]} And here's the cool science clue: ${f[4]} Pretty incredible, right?`)}
+function openMarker(m){document.getElementById('pi').textContent=m.icon;document.getElementById('pt').textContent=m.name;document.getElementById('pa').textContent=period().a;document.getElementById('pb').innerHTML=`<div>${m.text}</div><div class="fact"><b>🌟 Explorer challenge:</b> Look closely and imagine what this place looked like before humans changed the landscape.</div><span class="tag">${m.extra}</span>`;panel.style.display='block';document.getElementById('hear').onclick=()=>speak(`${m.name}. ${m.text}`);document.getElementById('guide').onclick=()=>speak(`Whoa, explorers! Check this out! ${m.text} That is one of the amazing clues scientists use to understand Earth's past!`)}
+function closePanel(){panel.style.display='none'}
+function speak(text){if(!('speechSynthesis'in window)){alert('Voice playback is not available in this browser.');return}speechSynthesis.cancel();let u=new SpeechSynthesisUtterance(text);u.lang='en-US';u.rate=.98;u.pitch=1.14;u.volume=1;let vs=speechSynthesis.getVoices(),us=vs.filter(v=>/^en-US/i.test(v.lang));u.voice=us.find(v=>/Samantha|Ava|Jenny|Aria|Guy|Google US|Microsoft.*(Jenny|Aria|Guy)/i.test(v.name))||us.find(v=>/Premium|Enhanced|Natural|Neural/i.test(v.name))||us[0]||null;speechSynthesis.speak(u)}
+function tell(){speak('Hey explorer! '+period().story)}
+function story(){if(playing){playing=false;clearTimeout(timer);return}playing=true;let i=P.findIndex(p=>p.v>=+S.value);if(i<0)i=0;function next(){if(!playing||i>=P.length){playing=false;return}setTime(P[i].v);speak('Hey explorer! '+P[i].story);i++;timer=setTimeout(next,8500)}next()}
+function reset(){rx=.16;ry=-.45;z=1;draw()}
+function setView(v){view=v;draw()}
+function topic(t){let p=period();if(t==='events'){openMarker(markers.find(m=>m.name==='Asteroid impact'))}else if(t==='humans'){openMarker(markers.find(m=>m.name==='Early human camp'))}else if(t==='science'){openRegion('Pangaea')}else if(t==='life'){openMarker(markers.find(m=>Math.abs(m.v-+S.value)<45)||markers[0])}}
+function quiz(){let p=period(),q,a;if(p.v>=700&&p.v<900){q='Which animals are strongly associated with the Jurassic and Cretaceous?';a='Dinosaurs'}else if(p.v>=900){q='Which giant animals lived during parts of the Ice Age?';a='Mammoths and other giant mammals'}else if(p.v===650){q='What was Pangaea?';a='A giant supercontinent'}else{q='Where did the earliest life mostly live?';a='In the oceans'}let x=prompt(q+'\\n\\nType your answer:');if(x!==null)alert('Explorer answer: '+a+'\\n\\nGreat scientists ask questions and keep exploring!')}
+C.addEventListener('pointerdown',e=>{drag=true;C.setPointerCapture(e.pointerId);lx=e.offsetX;ly=e.offsetY;down=Math.hypot(0,0)});
+C.addEventListener('pointermove',e=>{if(!drag)return;let x=e.offsetX,y=e.offsetY;rx+=(y-ly)*.006;ry+=(x-lx)*.006;rx=Math.max(-1.3,Math.min(1.3,rx));lx=x;ly=y;draw()});
+C.addEventListener('pointerup',e=>{let moved=Math.hypot(e.offsetX-lx,e.offsetY-ly);drag=false;if(moved<12)hit(e.offsetX,e.offsetY)});
+C.addEventListener('wheel',e=>{e.preventDefault();z=Math.max(.65,Math.min(1.7,z*(e.deltaY<0?1.08:.92)));draw()},{passive:false});
+let touchDist=0,touchZoom=1;C.addEventListener('touchstart',e=>{if(e.touches.length===2){touchDist=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);touchZoom=z}},{passive:true});C.addEventListener('touchmove',e=>{if(e.touches.length===2){let d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX,e.touches[0].clientY-e.touches[1].clientY);z=Math.max(.65,Math.min(1.7,touchZoom*d/touchDist));draw()}},{passive:true});
+addEventListener('resize',resize);resize();renderEras();setTime(760);setInterval(()=>{if(playing)draw()},50);
 </script>
-</body>
-</html>
+</body></html>
